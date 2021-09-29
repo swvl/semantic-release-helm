@@ -1,14 +1,14 @@
 {
-  "name": "semantic-release-helm",
-  "version": "2.1.0",
+  "name": "semantic-release-helm-app",
+  "version": "1.0.0",
   "description": "semantic-release plugin to update version and appVersion in a Helm chart",
   "main": "index.js",
   "files": [
     "index.js",
     "lib/**/*.js"
   ],
-  "repository": "https://github.com/m1pl/semantic-release-helm.git",
-  "author": "Mihai Plasoianu <mihai@plasoianu.de>",
+  "repository": "https://github.com/swvl/semantic-release-helm.git",
+  "author": "Ahmad Abdelaziz <a.3b3ziz@gmail.com>",
   "license": "MIT",
   "dependencies": {
     "aggregate-error": "^3.1.0",
