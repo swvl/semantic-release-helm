@@ -4,6 +4,7 @@ const publishChart = require('./lib/publish');
 
 let verified = false;
 let prepared = false;
+let hasChartChanges = false;
 
 async function verifyConditions(pluginConfig, context) {
     await verifyChart(pluginConfig, context);
@@ -15,8 +16,9 @@ async function prepare(pluginConfig, context) {
         await verifyChart(pluginConfig, context);
     }
 
-    await prepareChart(pluginConfig, context);
+    const preparationResult = await prepareChart(pluginConfig, context);
     prepared = true;
+    hasChartChanges = preparationResult.hasChartChanges
 }
 
 async function publish(pluginConfig, context) {
@@ -27,7 +29,9 @@ async function publish(pluginConfig, context) {
         await prepareChart(pluginConfig, context);
     }
 
-    await publishChart(pluginConfig, context);
+    if (hasChartChanges) {
+        await publishChart(pluginConfig, context);
+    }
 }
 
-module.exports = {verifyConditions, prepare, publish};
+module.exports = { verifyConditions, prepare, publish };
