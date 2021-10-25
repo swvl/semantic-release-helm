@@ -4,7 +4,7 @@ const publishChart = require('./lib/publish');
 
 let verified = false;
 let prepared = false;
-let bumpChartYamlFile = false;
+let hasChartChanges = false;
 
 async function verifyConditions(pluginConfig, context) {
     await verifyChart(pluginConfig, context);
@@ -16,20 +16,20 @@ async function prepare(pluginConfig, context) {
         await verifyChart(pluginConfig, context);
     }
 
-    const preparationResult = await prepareChart(pluginConfig, context);
+    hasChartChanges = await prepareChart(pluginConfig, context);
     prepared = true;
-    bumpChartYamlFile = preparationResult.bumpChartYamlFile
 }
 
 async function publish(pluginConfig, context) {
     if (!verified) {
         await verifyChart(pluginConfig, context);
     }
+
     if (!prepared) {
         await prepareChart(pluginConfig, context);
     }
 
-    if (bumpChartYamlFile) {
+    if (hasChartChanges) {
         await publishChart(pluginConfig, context);
     }
 }
