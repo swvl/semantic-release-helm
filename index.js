@@ -16,15 +16,15 @@ async function prepare(pluginConfig, context) {
         await verifyChart(pluginConfig, context);
     }
 
-    const preparationResult = await prepareChart(pluginConfig, context);
+    hasChartChanges = await prepareChart(pluginConfig, context);
     prepared = true;
-    hasChartChanges = preparationResult.hasChartChanges
 }
 
 async function publish(pluginConfig, context) {
     if (!verified) {
         await verifyChart(pluginConfig, context);
     }
+
     if (!prepared) {
         await prepareChart(pluginConfig, context);
     }
