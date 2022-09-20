@@ -16,7 +16,7 @@ async function prepare(pluginConfig, context) {
         await verifyChart(pluginConfig, context);
     }
 
-    hasChartChanges = await prepareChart(pluginConfig, context);
+    await prepareChart(pluginConfig, context);
     prepared = true;
 }
 
@@ -29,9 +29,7 @@ async function publish(pluginConfig, context) {
         await prepareChart(pluginConfig, context);
     }
 
-    if (hasChartChanges) {
-        await publishChart(pluginConfig, context);
-    }
+    await publishChart(pluginConfig, context);
 }
 
 module.exports = { verifyConditions, prepare, publish };
